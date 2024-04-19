@@ -27,6 +27,36 @@
     </table>
 
 <script>
+    getData();
+
+    function getData(){
+        $.ajax({
+            url:"getDataPortfolio.php",
+            dataType:"json",
+            method:"post",
+            data:{
+
+            },
+            success: function(data){
+                displayHead(data.competences);
+                console.log(data);
+            }
+        })
+    }
+
+    function displayHead(data) {
+        $('#portfolio').append("<tr></tr>");
+        data.forEach(function(data){
+            $('#portfolio').find("tr").append("<th>"+data.titre+"</th>");
+        })
+        
+        $('#portfolio').append("<tr></tr>");
+        data.forEach(function(data){
+            $('#portfolio').find("tr").last().append("<td>"+data.lib+"</td>");
+        })
+    }
+        
+
     let competences = [
         {"head":"Réalisation", "lib":""},
         {"head":"Gérer le patrimoine informatique","lib":"▸Recenser et identifier les ressources numériques<br> ▸Exploiter des référentiels, normes et standards adoptés par le prestataire informatique<br> ▸Mettre en place et vérifier les niveaux d’habilitation associés à un service<br> ▸Vérifier les conditions de la continuité d’un service informatique<br> ▸Gérer des sauvegardes<br> ▸Vérifier le respect des règles d’utilisation des ressources numériques"},
@@ -52,6 +82,9 @@
         "",
         ""
     ]
+
+
+    /*
     $('#portfolio').append("<tr></tr>");
         competences.forEach(function(element){
         $('#portfolio').find("tr").append("<th>"+element.head+"</th>");
@@ -65,11 +98,12 @@
     realisations.forEach(function(element){
         $('#portfolio').append("<tr></tr>");
         $('#portfolio').find("tr").last().append("<th>"+element+"</th>");
-    })   
-    $('#portfolio').append("<tr></tr>");
+    })      
+    $('#portfolio').append("<tr></tr>"); 
         validations.forEach(function(element){ 
-        $('#portfolio').find("tr").append("<td> </td>");
+        $('#portfolio').find("tr").append("<td>"+element+"</td>");
     })
+    */
 </script>
 
 </body>

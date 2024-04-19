@@ -10,6 +10,16 @@ $(document).ready(function(){
     console.log("Ready");
     getData();
 })
+
+function constructTableHead(data){
+    $("portfolio").append("<tr id='lig1'></tr>");
+    $("portfolio").append("<tr></tr>");
+    $("tr").first().append("<th>"+data[0].title+"</th>");
+    $("tr").first().append("<th>"+data[1].title+"</th>");
+    $("tr").next().append("<th>"+data[0].lib+"</th>");
+    $("tr").next().append("<th>"+data[1].lib+"</th>");
+}
+
 function getData(){
     $.ajax({
         url:"getDataPortfolio.php",
