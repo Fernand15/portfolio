@@ -4,7 +4,15 @@
     <title>Site03-AutoComplete</title>
     <meta charset="utf-8">
     <script src="jquery.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        table{
+            border: 2px solid black;
+            border-collapse:collapse; 
+        }
+        td,th{
+            border: 1px solid black;
+        }
+    </style>
 
 </head>
 <body>
@@ -28,14 +36,14 @@
  
         $("#portfolio").append("<tr></tr>");
 
-        $("tr").first().append("<th>Vide</th>");
+        $("tr").first().append("<th>Réalisations</th>");
         for (let i=0; i < data.length;i++) {
             $("tr").first().append("<th>"+data[i].titre+"</th>");
         }
 
         $("#portfolio").append("<tr></tr>");
 
-        $("tr").last().append("<th>Vide</th>");
+        $("tr").last().append("<th></th>");
         for (let i=0; i < data.length;i++) {
             $("tr").last().append("<th>"+data[i].lib+"</th>");
         }

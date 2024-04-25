@@ -22,12 +22,49 @@
 <body>
 
     <table id="portfolio">
-        <thead>
-        </thead>
+
     </table>
+    <button onclick="getData()">Get Data</button>
 
 <script>
-    getData();
+    $(document).ready(function(){
+        console.log("Ready");
+        getData();
+    })
+
+    function constructTableHead(data) {
+        $('#portfolio').append("<tr></tr>");
+
+        $("tr").first().append("<th>Vide</th>");
+        for (let i=0; i < data.length;i++){
+            $("tr").first().append("<th>"+data[i].titre+"</th>");
+        }
+        
+        $('#portfolio').append("<tr></tr>");
+
+        $("tr").last().append("<th>Vide</th>");
+        for (let i=0; i < data.length;i++){
+            $("tr").last().append("<th>"+data[i].lib+"</th>");
+        }
+    }
+
+    function constructTableReal(data){
+        for (let i=0;i<data.realisations.length;i++){
+            $("#portfolio").append("<tr></tr>");
+            $("tr").last().append("<td class='real'>"+data.realisation[i].lib+"</td>");
+
+            for (let j=0;j<data.competences.length;j++){
+                $("tr").last().append("<td croix=c"+data.competences[j].id+"r"+data.realisations[i].id"></td>");
+            }
+
+        }
+
+        data.croix.forEach(function (croix){
+            console.log(croix);
+            $("[croix=c"+croix.compentences_id+"r"+croix.realisation_id+"]").addClass("OK").html("XX");
+        })
+    }
+
 
     function getData(){
         $.ajax({
@@ -38,25 +75,12 @@
 
             },
             success: function(data){
-                displayHead(data.competences);
-                console.log(data);
+                constructTableHead(data.competences);
+                constructTableReal(data);
             }
         })
-    }
-
-    function displayHead(data) {
-        $('#portfolio').append("<tr></tr>");
-        data.forEach(function(data){
-            $('#portfolio').find("tr").append("<th>"+data.titre+"</th>");
-        })
-        
-        $('#portfolio').append("<tr></tr>");
-        data.forEach(function(data){
-            $('#portfolio').find("tr").last().append("<td>"+data.lib+"</td>");
-        })
-    }
-        
-
+    }   
+/*
     let competences = [
         {"head":"Réalisation", "lib":""},
         {"head":"Gérer le patrimoine informatique","lib":"▸Recenser et identifier les ressources numériques<br> ▸Exploiter des référentiels, normes et standards adoptés par le prestataire informatique<br> ▸Mettre en place et vérifier les niveaux d’habilitation associés à un service<br> ▸Vérifier les conditions de la continuité d’un service informatique<br> ▸Gérer des sauvegardes<br> ▸Vérifier le respect des règles d’utilisation des ressources numériques"},
@@ -82,7 +106,7 @@
         "",
         ""
     ]
-
+*/
 
     /*
     $('#portfolio').append("<tr></tr>");
